@@ -1,0 +1,70 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<html style="zoom: 150%;">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'home/css/vysh.css' %}">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<nav style="margin-bottom:1%;background-color: #e3f2fd;padding: 2%;font-size: larger;" class="navbar navbar-expand-lg navbar-light">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+	  <a style="font-size: x-large;" class="navbar-brand" href="#">Admin Dashboard</a>
+	</div>
+  </nav>
+<body onload="load()" style="padding: 20px;">
+
+<div id="userdata">
+
+<table id="myTableData" class="table table-striped table-bordered table-hover table-responsive" style="width:100%">
+
+    <tr>
+        <th scope="col"><b><p style="text-align:center;">User Name</b></th></p>
+		<th scope="col"><b><p style="text-align:center;">Phone no.</b></th></p>
+		<th scope="col"><b><p style="text-align:center;">Email</b></th></p>
+        <th scope="col"><b><p style="text-align:center;">Credit Card No.</b></th></p>
+	<th><b><p style="text-align:center;">Status</b></th></p>
+	<th><b><p style="text-align:center;">Action</b></th></p>
+    </tr>
+
+	{% for i in all_users %}
+    <tr>
+	<td><b><p style="text-align:center;">{{ i.name }}</p></b></td>
+	<td><b><p style="text-align:center;">{{ i.phone }}</p></b></td>
+	<td><b><p style="text-align:center;">{{ i.email }}</p></b></td>
+	<td><b><p style="text-align:center;">{{ i.card_no }}</p></b></td>
+	{% if i.status == "unknown" %}
+	<td style="background-color:lightblue;"><b><p style="text-align:center;">{{ i.status }}</p></b></td>
+	{% endif %}
+	{% if i.status == "suspicious behaviour" %}
+	<td style="background-color:coral;"><b><p style="text-align:center;">{{ i.status }}</p></b></td>
+	{% endif %}
+	{% if i.status == "normal behaviour" %}
+	<td style="background-color:lightgreen;"><b><p style="text-align:center;">{{ i.status }}</p></b></td>
+	{% endif %}
+	<td ><p style="text-align:center;"></p>
+		<form method="post">
+			<input type="hidden" value={{i.email}} name="email" id="email">
+			<input class="btn btn-warning btn-lg" style="background-color: steelblue;width: 100%;" type="submit" value="Generate Prediction">
+		</form>
+	</td>
+</button>
+    </tr>
+	{% endfor %}
+
+
+</table>
+&nbsp;
+ 
+</div>
+
+</body>
+</html>
